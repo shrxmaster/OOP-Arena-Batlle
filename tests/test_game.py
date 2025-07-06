@@ -27,14 +27,11 @@ class TestGame:
         game = Game()
         game.start()
         
-        # Verify character selection
         assert isinstance(game.player_creature, Mage)
         assert game.player_creature.name == "Gandalf"
         
-        # Verify computer generation
         mock_generate.assert_called_once()
         
-        # Verify battle start
         mock_arena.assert_called_once_with(
             game.player_creature,
             game.computer_creature
