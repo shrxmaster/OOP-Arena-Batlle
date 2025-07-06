@@ -21,17 +21,14 @@ class TestCreatureBasics:
         assert warrior.is_alive is True
     
     def test_take_damage(self, warrior):
-        # Test defense calculation
         damage_taken = warrior.take_damage(15)
-        assert damage_taken == 5  # 15 damage - 10 defense
+        assert damage_taken == 5  
         assert warrior.health == 115
         
-        # Test minimum damage
         damage_taken = warrior.take_damage(5)
         assert damage_taken == 1
         assert warrior.health == 114
         
-        # Test death
         warrior.take_damage(200)
         assert warrior.health == 0
         assert warrior.is_alive is False
@@ -77,7 +74,7 @@ class TestMage:
 
 class TestArcher:
     def test_normal_attack(self, archer, mage, monkeypatch):
-        monkeypatch.setattr(random, 'random', lambda: 0.3)  # No critical
+        monkeypatch.setattr(random, 'random', lambda: 0.3) 
         initial_health = mage.health
         damage, message = archer.attack(mage)
         assert "shoots an arrow" in message
