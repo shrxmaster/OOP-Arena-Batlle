@@ -31,7 +31,6 @@ class TestArena:
         assert player.health < 120
     
     def test_battle_flow(self, arena, player, computer):
-        # Force quick battle by reducing health
         player._health = 10
         computer._health = 5
         
@@ -40,7 +39,6 @@ class TestArena:
         assert not (player.is_alive and computer.is_alive)
     
     def test_warrior_special_in_battle(self, arena, player, computer, monkeypatch):
-        # Setup rage for special
         player._rage = 30
         
         log = arena.execute_turn(player, computer)
@@ -48,10 +46,8 @@ class TestArena:
         assert "Additional" in log
     
     def test_mage_special_in_battle(self, arena, player, computer, monkeypatch):
-        # Setup mana for special
         computer._mana = 40
         
-        # Skip player turn
         arena.execute_turn(player, computer)
         
         log = arena.execute_turn(computer, player)
